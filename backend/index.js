@@ -5,6 +5,10 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 
+import dotenv from "dotenv";
+//routers imports
+import postRouter from "./Routes/posts.js";
+
 const app = express();
 //What Is Body-parser?
 //Express body-parser is an npm module used to process data sent in an HTTP request body. \
@@ -27,10 +31,14 @@ app.use(
 
 app.use(cors());
 
+dotenv.config();
+//use routes with appending the URI before redirecting to postrouts
+app.use("/posts", postRouter); //postRoute
+
 //get this uri from the mongoose cloud service
-const CONNECTION_URL =
-  "mongodb+srv://vaibh:123@cluster0.ryu5cjz.mongodb.net/?retryWrites=true&w=majority";
-const PORT = 5000;
+const CONNECTION_URL = process.env.CONNECTION_URL;
+console.log(CONNECTION_URL);
+const PORT = process.env.PORT;
 
 //when mongoose connects it starts to listen
 const listenToServer = () => {
