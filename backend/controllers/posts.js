@@ -17,4 +17,13 @@ export const getPosts = async (req, res) => {
   }
 };
 
-export const createPosts = (req, res) => {};
+export const createPosts = async (req, res) => {
+  const post = req.body;
+  const postMessage = new postMessages(post);
+  try {
+    await postMessage.save();
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error.message);
+  }
+};

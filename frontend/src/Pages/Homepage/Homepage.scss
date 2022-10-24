@@ -1,0 +1,41 @@
+.homepage{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+   
+    
+
+    @media screen and (max-width:768px) {
+        flex-direction: column;
+        width: 90vw;
+    }
+
+    .homepage-cards{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        min-width: 65vw;
+        // padding: 1rem;
+        // justify-content: -evenly;
+        flex-wrap: wrap;
+        @media screen and (max-width:768px) {
+            flex-direction: column;
+            width: 100%;
+        }
+
+    }
+    .homepage-form{
+       display: flex;
+       
+       flex-direction: row;
+    //    align-items: center;
+       justify-content: center;
+       font-family: 'jura';
+        width: 100%;
+        padding: 1rem;
+        // border: 1px solid black;
+        // max-width: 30vw;
+       
+    }
+}
+

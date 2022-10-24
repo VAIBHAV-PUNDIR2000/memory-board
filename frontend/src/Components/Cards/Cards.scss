@@ -1,0 +1,94 @@
+.card{
+
+    user-select: none;
+    flex-direction: column;   
+    display: flex;
+    margin: 1rem;
+    max-width: 25vw;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    // border: 2px solid gray;
+    padding: 1rem;
+    // border-radius: px;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        max-width: 80vw;
+    }
+
+
+    .paperclip{
+        position:  relative;
+        height: 40px;
+        bottom:40px;
+        width: 40px;
+    
+    }
+
+    .card-img{
+        max-width: 90vw;
+        img {
+            width: 100%;
+            height: 300px;
+            object-fit: clip;
+          }
+    }
+
+    .card-title{
+        font-family: 'Cookie';
+        font-weight: 200;   
+        padding-right: 1rem;
+        padding-left: 0.5rem;
+        
+        font-size: 26px;
+        position: relative;
+        bottom: 50px;
+        color: white;
+        mix-blend-mode:   hard-light;
+        letter-spacing: 2px;
+        transform: rotate(4deg);
+        background-color:rgba(0,0,0,0.4);
+    
+        padding-left: 8px;
+  
+    }
+    .card-description{
+        color:grey; 
+        display: flex;
+        text-emphasis: none;
+        text-align: left;
+        font-size: medium;
+        font-family: 'cookie';
+        letter-spacing: 1px;
+    }
+
+    .card-action-item-row{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 100%;
+        margin-top: 1rem;
+        font-family: 'jura';
+        
+        :nth-child(1){
+            min-width: 3rem;
+            display: flex;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            background-color: var(--PURPLE);
+        }
+        :nth-child(2){
+            min-width: 3rem;
+            display: flex;
+            justify-content: center;
+            border: 1px solid var(--PURPLE);
+            cursor: pointer;
+            color: var(--PURPLE);
+            padding: 0.5rem;
+            
+        }
+    }
+
+}
