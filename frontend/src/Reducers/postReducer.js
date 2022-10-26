@@ -1,21 +1,30 @@
-export const postReducer = (state, dispatch) => {
-  switch (dispatch.type) {
+export const postReducer = (state, action) => {
+  // console.log(state);
+  switch (action.type) {
     case "SET_POST": {
-      console.log(dispatch.payload);
-      return { state: dispatch.payload };
+      return action.payload;
     }
     case "SET_ERR": {
-      return { ...state, state: dispatch.payload };
+      {
+        return { ...state, state: action.payload };
+      }
     }
-    case "CLEAR_POST":
+    case "CLEAR_POST": {
       return {
         ...state,
         creater: "",
         title: "",
         description: "",
-        image: "",
+        file: "",
         tags: [],
       };
+    }
+    case "ADD_POST": {
+      console.log(action.payload);
+      return [...state, action.payload];
+
+      break;
+    }
     default:
       return state;
   }

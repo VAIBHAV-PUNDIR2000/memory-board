@@ -1,7 +1,3 @@
-export const postStore = {
-  creater: "",
-  title: "",
-  description: "",
-  image: "",
-  tags: [],
-};
+export const postStore = [
+  { creater: "", title: "", description: "", file: "", tags: [] },
+];

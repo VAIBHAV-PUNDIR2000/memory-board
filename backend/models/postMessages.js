@@ -4,21 +4,21 @@ import mongoose from "mongoose";
 const postSchema = mongoose.Schema({
   //main data
   title: String,
-  message: String,
+  description: String,
   creater: String,
 
-  //meta data
+  // meta data
   tags: [String],
-  selectedFile: String,
+  file: String,
   likeCount: {
     type: Number,
-    initial: 0,
+    default: 0,
   },
 
   //creating data
   createdAt: {
     type: Date,
-    initial: Date.now(),
+    default: Date.now(),
   },
 });
 

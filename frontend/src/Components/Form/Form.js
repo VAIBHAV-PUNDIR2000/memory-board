@@ -3,7 +3,8 @@ import "./Form.scss";
 import uploadSign from "../../Constants/upload-sign.png";
 import { useState, useContext, useEffect } from "react";
 import { context } from "../../store/context";
-
+import FileBase from "react-file-base64";
+import { pushPost } from "../../api";
 const Form = () => {
   const { state, dispatch } = useContext(context);
   const [formData, setFormData] = useState({
@@ -20,12 +21,6 @@ const Form = () => {
       i.value = "";
     });
   };
-  useEffect(() => {
-    dispatch({
-      type: "SET_POST",
-      payload: formData,
-    });
-  }, [formData]);
 
   return (
     <div className="form">
@@ -49,11 +44,18 @@ const Form = () => {
           setFormData({ ...formData, description: e.target.value })
         }
       />
-      <label htmlFor="picture">
-        <img src={uploadSign} className="upload-sign"></img>
-        DRAG-DROP OR CLICK TO UPLOAD
-      </label>
-      <input type="file" id="picture" className="file-input" />
+
+      <FileBase
+        type="file"
+        id="pic"
+        multiple={false}
+        label="Document"
+        onDone={({ base64 }) => {
+          setFormData({ ...formData, file: base64 });
+        }}
+        className="file-input"
+      ></FileBase>
+
       <p>Tags</p>
       <input
         type="text"
@@ -73,10 +75,14 @@ const Form = () => {
         <button
           className="form-button-group save"
           onClick={() => {
-            setFormData({});
+            pushPost(dispatch, formData, clearForm, state);
             clearForm();
-            dispatch({
-              type: "CLEAR_POST",
+            setFormData({
+              creater: "",
+              title: "",
+              description: "",
+              file: "",
+              tags: [],
             });
           }}
         >
@@ -85,11 +91,14 @@ const Form = () => {
         <button
           className="form-button-group clear"
           onClick={() => {
-            setFormData({});
-            clearForm();
-            dispatch({
-              type: "CLEAR_POST",
+            setFormData({
+              creater: "",
+              title: "",
+              description: "",
+              file: "",
+              tags: [],
             });
+            clearForm();
           }}
         >
           CLEAR

@@ -5,8 +5,9 @@
 .form{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     border-radius: 2px;
-  
+  margin-right: 1rem;
     margin-top: 2rem;
+    background-color: white;
     // border: 1px solid gray;
     // border: 1px solid gray;
     display: flex;
@@ -14,7 +15,9 @@
     width: 100%;
     max-width: 25vw;
     position: fixed;
+    top:10rem;
     font-weight: 500;
+    // height: 80vh;
     padding: 3rem;
     font-size: large;
     @media screen  and (max-width: 768px){

@@ -1,22 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Homepage.scss";
+import LoadingBar from "../../Components/LoadingBar/LoadingBar";
+import { context } from "../../store/context";
 import Cards from "../../Components/Cards/Cards";
 import Form from "../../Components/Form/Form";
+import EmptyShow from "../../Components/EmptyShow";
 const Homepage = () => {
+  const { state, dispatch, functionalityState } = useContext(context);
+
+  console.log({ state });
   const plusOrMinus = (val) => {
     return val < 1 ? -1 : 1;
   };
-  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15];
-  return (
+  return functionalityState.isLoading ? (
+    <LoadingBar />
+  ) : (
     <div className="homepage">
-      <div className="homepage-cards">
-        {cards.map((_, index) => (
-          <Cards
-            key={index}
-            tilt={(index % 3) * 100 * plusOrMinus(index % 3)}
-          />
-        ))}
-      </div>
+      {state.length ? (
+        <div className="homepage-cards">
+          {state.map((i, index) => (
+            <Cards
+              data={i}
+              key={index}
+              tilt={(index % 3) * 100 * plusOrMinus(index % 3)}
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyShow />
+      )}
       <div className="homepage-form ">
         <Form />
       </div>

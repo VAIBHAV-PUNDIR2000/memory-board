@@ -18,12 +18,26 @@ export const getPosts = async (req, res) => {
 };
 
 export const createPosts = async (req, res) => {
-  const post = req.body;
-  const postMessage = new postMessages(post);
+  const { title, description, file, creater, tags } = req.body;
+
+  const newPostMessage = new postMessages({
+    title,
+    description,
+    file,
+    creater,
+    tags,
+  });
+
   try {
-    await postMessage.save();
-    res.status(200).json(post);
+    await newPostMessage.save();
+
+    res.status(201).json(newPostMessage);
   } catch (error) {
-    console.log(error.message);
+    res.status(409).json({ message: error.message });
   }
+};
+
+export const removePosts = async (req, res) => {
+  try {
+  } catch (error) {}
 };
