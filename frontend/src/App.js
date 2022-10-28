@@ -19,8 +19,10 @@ const App = () => {
     FunctionalietiesStore
   );
   useEffect(() => {
-    setTimeout(() => getPosts(dispatch, functionalityDispatch), 1000);
-  }, []);
+    setTimeout(() => {
+      getPosts(dispatch, functionalityDispatch);
+    }, 1000);
+  }, [functionalityState.userSelected]);
 
   return (
     <context.Provider

@@ -1,4 +1,5 @@
 //importing Model
+import mongoose from "mongoose";
 import postMessages from "../models/postMessages.js";
 
 //The Brain part of the posts related requests
@@ -40,4 +41,17 @@ export const createPosts = async (req, res) => {
 export const removePosts = async (req, res) => {
   try {
   } catch (error) {}
+};
+
+export const updatePost = async (req, res) => {
+  const { id } = req.params; //like :   https...posts/113 id=113
+  const post = req.body; //new post to be updated
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No post with such id");
+
+  const updatedPost = await postMessages.findByIdAndUpdate(id, post, {
+    new: true,
+  });
+  res.json(updatedPost);
 };

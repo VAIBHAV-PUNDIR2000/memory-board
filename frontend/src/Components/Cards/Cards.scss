@@ -33,11 +33,68 @@
             height: 300px;
             
             object-fit: cover;
+
           }
+
+
+          .card-img-icon{
+            position: absolute;
+        
+            width: 90%;
+            display: flex;
+            padding: 0.5rem;
+         
+            justify-content: flex-end;
+            font-size: large;
+            color: black;
+
+            div{
+               display: flex;
+            
+                
+                padding: 0.5rem;
+                border-radius: 50%;
+                cursor: pointer;
+
+            }
+           
+
+          }
+
+         
+    }
+
+    .card-creater{
+       
+    font-family: "jura";
+      display: flex;
+      padding: 0.2rem;
+      justify-content: space-between;
+        mix-blend-mode: hard-light;
+      font-weight: 600;
+    font-size: small;
+      text-transform: uppercase;
+    margin-bottom: 1rem;
+        padding: 0.4rem;
+        color: black;
+
+       div{ 
+        padding: 0.5rem     0.6rem;
+    border-radius: 50%;
+    }
+        div:hover{
+            background-color: rgba(0,0,0,0.4);
+        
+            transition: background-color 0.2s ease-in-out;
+        }
+
+
+      
     }
 
     .card-title{
-        font-family: 'Cookie';
+        font-family: 'Sacramento', cursive;
+            
         font-weight: 200;   
         padding-right: 1rem;
         padding-left: 0.5rem;
@@ -55,43 +112,35 @@
   
     }
     .card-description{
-        color:grey; 
+        color:rgb(0, 0, 0); 
         display: flex;
+        text-transform: uppercase;
         text-emphasis: none;
         text-align: left;
-        font-size: medium;
-        font-family: 'cookie';
-        letter-spacing: 1px;
+        font-size: small;
+        align-items: center;
+        justify-content: center;
+        color: var(--PURPLE);
+        font-weight: 600;
+        font-family:'Jura'
+ 
     }
 
     .card-action-item-row{
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: row;
-        width: 100%;
-        margin-top: 1rem;
-        font-family: 'jura';
         
-        :nth-child(1){
-            min-width: 3rem;
-            display: flex;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            padding: 0.5rem;
-            background-color: var(--PURPLE);
+        justify-content: space-around;
+      width: 100%;
+        font-size: large;
+        margin-top: 1rem;
+        color: var(--PURPLE);
+
+        :hover{
+            filter:invert(0.2);
         }
-        :nth-child(2){
-            min-width: 3rem;
-            display: flex;
-            justify-content: center;
-            border: 1px solid var(--PURPLE);
-            cursor: pointer;
-            color: var(--PURPLE);
-            padding: 0.5rem;
-            
-        }
+        // font-family: 'jura';
+        
+        
     }
 
 }

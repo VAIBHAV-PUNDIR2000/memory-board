@@ -4,9 +4,12 @@ import uploadSign from "../../Constants/upload-sign.png";
 import { useState, useContext, useEffect } from "react";
 import { context } from "../../store/context";
 import FileBase from "react-file-base64";
-import { pushPost } from "../../api";
+import { pushPost, updatePost } from "../../api";
+
 const Form = () => {
-  const { state, dispatch } = useContext(context);
+  const { state, dispatch, functionalityDispatch, functionalityState } =
+    useContext(context);
+
   const [formData, setFormData] = useState({
     creater: "",
     title: "",
@@ -14,32 +17,42 @@ const Form = () => {
     file: "",
     tags: [],
   });
+
   const [tag, setTag] = useState("");
-  const clearForm = () => {
-    const ref = document.getElementsByTagName("input");
-    Array.from(ref).forEach((i) => {
-      i.value = "";
-    });
-  };
+
+  useEffect(() => {
+    if (functionalityState.postSelected) {
+      const [postD] = state.filter(
+        (i) => i._id == functionalityState.postSelected
+      );
+      setFormData(postD);
+    }
+  }, [functionalityState.postSelected]);
 
   return (
     <div className="form">
+      <div className="form-heading">
+        {functionalityState.postSelected ? "Editing" : "Creating"} a Memory
+      </div>
       <p>Creater</p>
       <input
         type="text"
         placeholder="E.g Vaibhav"
+        value={formData.creater}
         onChange={(e) => setFormData({ ...formData, creater: e.target.value })}
       />
       <p>Title</p>
       <input
         type="text"
         placeholder="E.g My portrait"
+        value={formData.title}
         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
       />
       <p>Description</p>
       <input
         type="text"
         placeholder="E.g: We went on trip to Manali"
+        value={formData.description}
         onChange={(e) =>
           setFormData({ ...formData, description: e.target.value })
         }
@@ -49,6 +62,7 @@ const Form = () => {
         type="file"
         id="pic"
         multiple={false}
+        value={formData.file}
         label="Document"
         onDone={({ base64 }) => {
           setFormData({ ...formData, file: base64 });
@@ -60,6 +74,7 @@ const Form = () => {
       <input
         type="text"
         placeholder="#"
+        value={formData.tags}
         onChange={(e) => {
           setTag(e.target.value);
         }}
@@ -75,8 +90,15 @@ const Form = () => {
         <button
           className="form-button-group save"
           onClick={() => {
-            pushPost(dispatch, formData, clearForm, state);
-            clearForm();
+            !functionalityState.postSelected
+              ? pushPost(dispatch, formData, state)
+              : updatePost(
+                  dispatch,
+                  formData,
+                  functionalityState.postSelected,
+                  functionalityDispatch
+                );
+
             setFormData({
               creater: "",
               title: "",
@@ -91,6 +113,10 @@ const Form = () => {
         <button
           className="form-button-group clear"
           onClick={() => {
+            functionalityDispatch({
+              type: "CHANGE_SELECTED_POST",
+              dispatch: "",
+            });
             setFormData({
               creater: "",
               title: "",
@@ -98,7 +124,6 @@ const Form = () => {
               file: "",
               tags: [],
             });
-            clearForm();
           }}
         >
           CLEAR

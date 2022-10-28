@@ -23,6 +23,20 @@
     @media screen  and (max-width: 768px){
         position: static;
         max-width: 100vw;
+
+       
+    }
+
+
+
+
+    .form-heading{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        font-size: larger;
+        padding: 1rem;
+        align-items: center;
     }
     .form-button-group{
         display: flex;

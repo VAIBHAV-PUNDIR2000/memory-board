@@ -13,28 +13,45 @@ export const getPosts = async (dispatch, functionalityDispatch) => {
       });
       functionalityDispatch({
         type: "TOGGLE_LOADING",
+        payload: false,
       });
     })
     .catch((e) => console.log(e.message));
 };
 
-export const pushPost = async (dispatch, formData, clearForm, state) => {
+export const pushPost = async (dispatch, formData, state) => {
   await axios
     .post(url, formData)
     .then((e) => {
-      console.log("this", { formData });
+      console.log({ formData });
       dispatch({
         type: "ADD_POST",
         payload: formData,
       });
     })
-    .then(() => clearForm())
+    .then(() => {})
     .catch((e) => console.log(e));
 };
 
 export const removePost = async (id) => {
   await axios
-    .post(id)
+    .patch()
     .then(() => {})
     .catch((e) => console.log(e));
+};
+
+export const updatePost = async (
+  dispatch,
+  formdata,
+  id,
+  functionalityDispatch
+) => {
+  await axios.patch(`${url}/${id}`, formdata).then(() => {
+    getPosts(dispatch, functionalityDispatch).then(() => {
+      functionalityDispatch({
+        type: "CHANGE_SELECTED_POST",
+        payload: "",
+      });
+    });
+  });
 };

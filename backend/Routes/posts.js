@@ -3,7 +3,7 @@
 import express from "express";
 
 //importing Controller part
-import { getPosts, createPosts } from "../controllers/posts.js";
+import { getPosts, createPosts, updatePost } from "../controllers/posts.js";
 
 // instantiate router
 const postRouter = express.Router();
@@ -12,5 +12,6 @@ const postRouter = express.Router();
 
 postRouter.get("/", getPosts);
 postRouter.post("/", createPosts);
+postRouter.patch("/:id", updatePost);
 
 export default postRouter;
