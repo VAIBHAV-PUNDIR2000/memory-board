@@ -25,6 +25,7 @@ const Form = () => {
       const [postD] = state.filter(
         (i) => i._id == functionalityState.postSelected
       );
+      console.log(postD);
       setFormData(postD);
     }
   }, [functionalityState.postSelected]);

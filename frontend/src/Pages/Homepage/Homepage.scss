@@ -13,8 +13,8 @@
     .homepage-cards{
         display: flex;
         flex-direction: row;
-        width: 100%;
-        min-width: 65vw;
+        width: 60vw;
+        min-width: 60vw;
         // padding: 1rem;
         // justify-content: -evenly;
         flex-wrap: wrap;
@@ -26,16 +26,22 @@
     }
     .homepage-form{
        display: flex;
+    //    align-items:cen;
        
        flex-direction: row;
     //    align-items: center;
        justify-content: center;
        font-family: 'jura';
         width: 100%;
+        width: 15vw;
         padding: 1rem;
         // border: 1px solid black;
         // max-width: 30vw;
        
+        @media screen and (max-width:768px) {
+            flex-direction: column;
+            width: 70vw;
+        }
     }
 }
 

@@ -8,7 +8,7 @@ import EmptyShow from "../../Components/EmptyShow";
 const Homepage = () => {
   const { state, dispatch, functionalityState } = useContext(context);
 
-  console.log({ state });
+  // console.log({ state });
   const plusOrMinus = (val) => {
     return val < 1 ? -1 : 1;
   };

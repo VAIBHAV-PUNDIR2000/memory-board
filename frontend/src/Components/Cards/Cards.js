@@ -5,8 +5,10 @@ import { GoKebabVertical } from "react-icons/go";
 import moment from "moment";
 import paperclip from "../../Constants/clip.png";
 import { context } from "../../store/context";
+import { deletePost, getPosts, likePost } from "../../api";
 const Cards = ({ tilt, data }) => {
-  const { functionalityDispatch } = useContext(context);
+  const { functionalityDispatch, functionalityState, dispatch } =
+    useContext(context);
   return (
     <div className="card" style={{ transform: `rotate(${tilt / 60}deg)` }}>
       <img src={paperclip} className="paperclip"></img>
@@ -31,9 +33,26 @@ const Cards = ({ tilt, data }) => {
 
         <p className="card-description">{data?.description}</p>
         <div className="card-action-item-row">
-          <BsHeart />
+          {data?.likeCount}
+          <BsHeart
+            onClick={() => {
+              likePost(data?._id, data, dispatch, functionalityDispatch);
+              dispatch({
+                type: "LIKE_POST",
+                payload: data?._id,
+              });
+            }}
+          />
 
-          <BsTrashFill />
+          <BsTrashFill
+            onClick={() => {
+              console.log(data._id);
+              console.log(dispatch);
+              deletePost(data._id, dispatch);
+
+              console.log("here");
+            }}
+          />
         </div>
       </div>
     </div>

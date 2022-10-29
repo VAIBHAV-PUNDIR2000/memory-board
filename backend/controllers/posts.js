@@ -28,24 +28,33 @@ export const createPosts = async (req, res) => {
     creater,
     tags,
   });
+  console.log(newPostMessage);
 
   try {
     await newPostMessage.save();
 
+    console.log("new POst m", newPostMessage);
     res.status(201).json(newPostMessage);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
 };
 
-export const removePosts = async (req, res) => {
+export const deletePost = async (req, res) => {
   try {
-  } catch (error) {}
+    const { id } = req.params;
+
+    const post = await postMessages.findByIdAndDelete(id);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const updatePost = async (req, res) => {
   const { id } = req.params; //like :   https...posts/113 id=113
+  console.log(id);
   const post = req.body; //new post to be updated
+  console.log(post);
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No post with such id");
@@ -55,3 +64,21 @@ export const updatePost = async (req, res) => {
   });
   res.json(updatedPost);
 };
+
+export const likePost = async (req, res) => {
+  const { id } = req.params;
+  const post = await postMessages.findById(id);
+  const updatedPost = await postMessages.findByIdAndUpdate(
+    id,
+    {
+      likeCount: post.likeCount + 1,
+    },
+    { new: true }
+  );
+  res.json(updatePost);
+};
+
+// export const likePost= async(req,res)=>{
+//   const {id} = req.params
+//   const post =
+// }
