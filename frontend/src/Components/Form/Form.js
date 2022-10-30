@@ -45,7 +45,7 @@ const Form = () => {
       <p>Title</p>
       <input
         type="text"
-        placeholder="E.g My portrait"
+        placeholder="E. My portrait"
         value={formData.title}
         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
       />
